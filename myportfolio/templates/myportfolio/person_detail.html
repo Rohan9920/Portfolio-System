@@ -1,0 +1,102 @@
+{% extends 'myportfolio/base.html' %}
+
+{% block title %}
+    {{ person }}
+{%  endblock %}
+
+{%  block content %}
+    <article>
+    <div class="row">
+    <div class="offset-by-two eight columns">
+    <h2>{{ person }}</h2>
+    <ul class="inline">
+    {% if perms.myportfolio.change_person %}
+        <li>
+            <a href = "{{ person.get_update_url }}" class = "button button-primary">Edit Person
+            </a>
+        </li>
+    {% endif %}
+    {% if perms.myportfolio.delete_person %}
+        <li>
+            <a href = "{{ person.get_delete_url }}" class = "button button-primary">Delete Person
+            </a>
+        </li>
+    {% endif %}
+    </ul>
+    <section>
+        <table>
+            <tr>
+                <th>Name:</th>
+                <td>{{ person }}</td>
+            </tr>
+            <tr>
+                <th>Phone No:</th>
+                <td>{{ person.phone_no }}</td>
+            </tr>
+            <tr>
+                <th>Email ID:</th>
+                <td>{{ person.email_id }}</td>
+            </tr>
+            <tr>
+                <th>Description:</th>
+                <td>{{ person.description }}</td>
+            </tr>
+
+        </table>
+    </section>
+
+    <section>
+        <h3>Education</h3>
+        <ul>
+            {% for education in education_list %}
+                <li>
+                    <a href="{{ education.get_absolute_url }}">{{ education }}</a>
+                </li>
+            {% empty %}
+                <li><em>There is no education added for this person.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h3>Experience</h3>
+        <ul>
+            {% for experience in experience_list %}
+                <li>
+                    <a href="{{ experience.get_absolute_url }}">{{ experience }}</a>
+                </li>
+            {% empty %}
+                <li><em>There is no experience added for this person.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h3>Projects</h3>
+        <ul>
+            {% for project in project_list %}
+                <li>
+                    <a href="{{ project.get_absolute_url }}">{{ project }}</a>
+                </li>
+            {% empty %}
+                <li><em>There is no project added for this person.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h3>Skills</h3>
+        <ul>
+            {% for skill in skill_list %}
+                <li>
+                    <a href="{{ skill.get_absolute_url }}">{{ skill }}</a>
+                </li>
+            {% empty %}
+                <li><em>There is no skill added for this person.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+    </div>
+    </div>
+    </article>
+{%  endblock %}

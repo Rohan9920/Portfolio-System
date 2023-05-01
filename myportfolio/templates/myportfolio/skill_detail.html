@@ -1,0 +1,53 @@
+{% extends 'myportfolio/base.html' %}
+
+{% block title %}
+    {{ skill }}
+{%  endblock %}
+{% block content %}
+    <article>
+    <div class="row">
+    <div class="offset-by-two eight columns">
+    <h2>{{ skill }}</h2>
+    <ul class="inline">
+    {% if perms.myportfolio.change_skill %}
+        <li>
+            <a href = "{{ skill.get_update_url }}" class = "button button-primary">Edit Skill
+            </a>
+        </li>
+    {% endif %}
+    {% if perms.myportfolio.delete_skill %}
+        <li>
+            <a href = "{{ skill.get_delete_url }}" class = "button button-primary">Delete Skill
+            </a>
+        </li>
+    {% endif %}
+    </ul>
+    <section>
+        <table>
+            <tr>
+                <th>Skill:</th>
+                <td>{{ skill.skill_name }}</td>
+            </tr>
+            <tr>
+                <th>Proficiency:</th>
+                <td>{{ skill.proficiency }}</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h3>People who have the same skill level</h3>
+        <ul>
+            {% for person in person_list %}
+                <li>
+                    <a href="{{ person.get_absolute_url }}">{{ person }}</a>
+                </li>
+            {% empty %}
+                <li><em>There are no people having the same skill level.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+    </div>
+    </div>
+    </article>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'myportfolio/base.html' %}
+
+{% block title %}
+    {{ experience }}
+{%  endblock %}
+
+{% block content %}
+    <article>
+    <div class="row">
+    <div class="offset-by-two eight columns">
+    <h2>{{ experience }}</h2>
+    <ul class="inline">
+    {% if perms.myportfolio.change_experience %}
+        <li>
+            <a href = "{{ experience.get_update_url }}" class = "button button-primary">Edit Experience
+            </a>
+        </li>
+    {% endif %}
+    {% if perms.myportfolio.delete_experience %}
+        <li>
+            <a href = "{{ experience.get_delete_url }}" class = "button button-primary">Delete Experience
+            </a>
+        </li>
+    {% endif %}
+    </ul>
+    <section>
+        <table>
+            <tr>
+                <th>Company</th>
+                <td>{{ experience.company_name }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ experience.job_title }}</td>
+            </tr>
+            <tr>
+                <th>Start Date</th>
+                <td>{{ experience.start_date }}</td>
+            </tr>
+            <tr>
+                <th>End date</th>
+                <td>    {% if experience.end_date %}
+                            {{ experience.end_date }}
+                        {% else %}
+                            Currently working
+                        {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ experience.description }}</td>
+            </tr>
+        </table>
+    </section>
+    <section>
+    <table>
+            <tr>
+                <th>Person:</th>
+                <td><a href="{{ experience.person_id.get_absolute_url }}">{{ experience.person_id }}</a></td>
+            </tr>
+        </table>
+    </section>
+    </div>
+    </div>
+    </article>
+{% endblock %}

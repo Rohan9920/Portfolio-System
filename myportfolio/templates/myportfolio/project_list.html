@@ -1,0 +1,35 @@
+{% extends 'myportfolio/base.html' %}
+
+{% block title %}
+    Projects
+{%  endblock %}
+
+{% block create_button %}
+{% if perms.myportfolio.add_project %}
+    <a href="{% url 'myportfolio_project_create_urlpattern'  %}"
+    class = "button button-primary">
+        Add new project
+    </a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+ <h2>Projects</h2>
+    {% if perms.myportfolio.add_project %}
+    <div class = "mobile">
+    <a href="{% url 'myportfolio_project_create_urlpattern'  %}"
+    class = "button button-primary">
+        Add new project
+    </a>
+    </div>
+    {% endif %}
+    <ul>
+        {% for project in project_list %}
+            <li>
+                <a href="{{ project.get_absolute_url }}">{{ project }}</a>
+            </li>
+        {% empty %}
+        <li><em>There are no projects available. </em></li>
+        {% endfor %}
+    </ul>
+{%  endblock %}

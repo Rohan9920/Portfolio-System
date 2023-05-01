@@ -1,0 +1,36 @@
+{% extends 'myportfolio/base.html' %}
+
+{% block title %}
+    Education
+{%  endblock %}
+
+{% block create_button %}
+{% if perms.myportfolio.add_education %}
+
+    <a href="{% url 'myportfolio_education_create_urlpattern'  %}"
+        class = "button button-primary">
+        Add new education
+    </a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+ <h2>Education</h2>
+    {% if perms.myportfolio.add_education %}
+    <div class = "mobile">
+    <a href="{% url 'myportfolio_education_create_urlpattern'  %}"
+        class = "button button-primary">
+        Add new education
+    </a>
+    </div>
+    {% endif %}
+    <ul>
+        {% for education in education_list %}
+            <li>
+                <a href="{{ education.get_absolute_url }}">{{ education }} ( {{ education.person_id }} )</a>
+            </li>
+        {% empty %}
+        <li><em>There is no education available. </em></li>
+        {% endfor %}
+    </ul>
+{%  endblock %}

@@ -1,0 +1,36 @@
+{% extends 'myportfolio/base.html' %}
+
+{% block title %}
+    Skills
+{%  endblock %}
+
+{% block create_button %}
+
+    {% if perms.myportfolio.add_skill %}
+    <a href="{% url 'myportfolio_skill_create_urlpattern'  %}"
+    class = "button button-primary">
+        Add new skill
+    </a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+ <h2>Skills</h2>
+    {% if perms.myportfolio.add_skill %}
+    <div class = "mobile">
+    <a href="{% url 'myportfolio_skill_create_urlpattern'  %}"
+    class = "button button-primary">
+        Add new skill
+    </a>
+    </div>
+    {% endif %}
+    <ul>
+        {% for skill in skill_list %}
+            <li>
+                <a href="{{ skill.get_absolute_url }}">{{ skill }}</a>
+            </li>
+        {% empty %}
+        <li><em>There are no skills available. </em></li>
+        {% endfor %}
+    </ul>
+{%  endblock %}

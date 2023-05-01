@@ -1,0 +1,36 @@
+{% extends 'myportfolio/base.html' %}
+
+{% block title %}
+    Experience
+{%  endblock %}
+
+{% block create_button %}
+{% if perms.myportfolio.add_experience %}
+
+    <a href="{% url 'myportfolio_experience_create_urlpattern'  %}"
+    class = "button button-primary">
+        Add new experience
+    </a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+ <h2>Experience</h2>
+    {% if perms.myportfolio.add_experience %}
+    <div class = "mobile">
+    <a href="{% url 'myportfolio_experience_create_urlpattern'  %}"
+    class = "button button-primary">
+        Add new experience
+    </a>
+    </div>
+    {% endif %}
+    <ul>
+        {% for experience in experience_list %}
+            <li>
+                <a href="{{ experience.get_absolute_url }}">{{ experience }} ( {{ experience.person_id }} )</a>
+            </li>
+        {% empty %}
+        <li><em>There is no experience available. </em></li>
+        {% endfor %}
+    </ul>
+{%  endblock %}

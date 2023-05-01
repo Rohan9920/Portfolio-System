@@ -1,0 +1,17 @@
+{% extends 'myportfolio/base.html' %}
+{%  block title %}
+Update Project
+{% endblock %}
+
+{% block content %}
+
+<body>
+<form
+        action="{{ project.get_update_url }}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">
+        Update Project</button>
+    </form>
+{% endblock %}

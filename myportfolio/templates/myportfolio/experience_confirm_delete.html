@@ -1,0 +1,19 @@
+{% extends 'myportfolio/base.html' %}
+
+{% block title %}
+    Delete Experience
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ experience.get_delete_url }}"
+        method="post">
+        {% csrf_token %}
+        <p>
+            Are you sure that you want to delete
+            experience {{ education }}?
+        </p>
+        <a href="{{ experience.get_absolute_url }}" class="button button-primary">Cancel</a>
+        <button type="submit" class="button button-primary">Delete Experience</button>
+    </form>
+{% endblock %}

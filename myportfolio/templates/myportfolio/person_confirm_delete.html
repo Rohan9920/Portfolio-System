@@ -1,0 +1,19 @@
+{% extends 'myportfolio/base.html' %}
+
+{% block title %}
+    Delete Person
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ person.get_delete_url }}"
+        method="post">
+        {% csrf_token %}
+        <p>
+            Are you sure that you want to delete
+            person {{ person }}?
+        </p>
+        <a href="{{ person.get_absolute_url }}" class="button button-primary">Cancel</a>
+        <button type="submit" class="button button-primary">Delete Person</button>
+    </form>
+{% endblock %}

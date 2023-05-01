@@ -1,0 +1,55 @@
+{% extends 'myportfolio/base.html' %}
+
+{% block title %}
+    Error Deleting Person
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Error Deleting Person</h2>
+        <p>
+            You may not delete person {{ instructor }}.  This
+            person is currently assigned to the following:
+        </p>
+
+        {% if education_list %}
+            <h3>Education</h3>
+            <ul>
+                {% for education in education_list %}
+                    <li><a href="{{ education.get_absolute_url }}">{{ education }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if experience_list %}
+            <h3>Experience</h3>
+            <ul>
+                {% for experience in experience_list %}
+                    <li><a href="{{ experience.get_absolute_url }}">{{ experience }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if project_list %}
+            <h3>Project</h3>
+            <ul>
+                {% for project in project_list %}
+                    <li><a href="{{ project.get_absolute_url }}">{{ project }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if skill_list %}
+            <h3>Skill</h3>
+            <ul>
+                {% for skill in skill_list %}
+                    <li><a href="{{ skill.get_absolute_url }}">{{ skill }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <p>
+            Return to <a href="{% url 'myportfolio_person_list_urlpattern' %}">Person List</a>.
+        </p>
+    </div>
+{% endblock %}

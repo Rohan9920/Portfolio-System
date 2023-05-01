@@ -1,0 +1,17 @@
+{% extends 'myportfolio/base.html' %}
+{%  block title %}
+Update Experience
+{% endblock %}
+
+{% block content %}
+
+<body>
+<form
+        action="{{ experience.get_update_url }}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">
+        Update Experience</button>
+    </form>
+{% endblock %}

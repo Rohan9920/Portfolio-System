@@ -1,0 +1,35 @@
+{% extends 'myportfolio/base.html' %}
+
+{% block title %}
+    Persons
+{%  endblock %}
+
+{% block create_button %}
+    {% if perms.myportfolio.add_person  %}
+    <a href="{% url 'myportfolio_person_create_urlpattern'  %}"
+        class = "button button-primary">
+        Add new person
+    </a>
+    {% endif %}
+    {% endblock %}
+
+{% block org_content %}
+    <h2>Persons</h2>
+    {% if perms.myportfolio.add_person  %}
+        <div class = "mobile">
+    <a href="{% url 'myportfolio_person_create_urlpattern'  %}"
+        class = "button button-primary">
+        Add new person
+    </a>
+        </div>
+    {% endif %}
+    <ul>
+        {% for person in person_list %}
+            <li>
+                <a href="{{ person.get_absolute_url }}">{{ person }}</a>
+            </li>
+        {% empty %}
+        <li><em>There are no portfolios available. </em></li>
+        {% endfor %}
+    </ul>
+{%  endblock %}

@@ -1,0 +1,16 @@
+{% extends 'myportfolio/base.html' %}
+{% block title %}
+Update Person
+{% endblock %}
+
+{% block content %}
+<body>
+<form
+        action="{% url 'myportfolio_person_create_urlpattern'%}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">
+        Add Person</button>
+    </form>
+{% endblock %}

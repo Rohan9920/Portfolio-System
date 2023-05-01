@@ -1,0 +1,66 @@
+{% extends 'myportfolio/base.html' %}
+
+{% block title %}
+    {{ education }}
+{%  endblock %}
+
+{% block content %}
+    <article>
+    <div class="row">
+    <div class="offset-by-two eight columns">
+    <h2>{{ education }}</h2>
+    <ul class="inline">
+    {% if perms.myportfolio.change_education %}
+        <li>
+            <a href = "{{ education.get_update_url }}" class = "button button-primary">Edit Education
+            </a>
+        </li>
+    {% endif %}
+    {% if perms.myportfolio.delete_education %}
+        <li>
+            <a href = "{{ education.get_delete_url }}" class = "button button-primary">Delete Education
+            </a>
+        </li>
+    {% endif %}
+    </ul>
+    <section>
+        <table>
+            <tr>
+                <th>School</th>
+                <td>{{ education.school }}</td>
+            </tr>
+            <tr>
+                <th>Degree</th>
+                <td>{{ education.degree_name }}</td>
+            </tr>
+            <tr>
+                <th>Start Date</th>
+                <td>{{ education.start_date }}</td>
+            </tr>
+            <tr>
+                <th>End date</th>
+                <td>    {% if education.end_date %}
+                            {{ education.end_date }}
+                        {% else %}
+                            Currently studying
+                        {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>GPA</th>
+                <td>{{ education.gpa }}</td>
+            </tr>
+        </table>
+    </section>
+    <section>
+        <table>
+            <tr>
+                <th>Person:</th>
+                <td><a href="{{ education.person_id.get_absolute_url }}">{{ education.person_id }}</a></td>
+            </tr>
+        </table>
+    </section>
+    </div>
+    </div>
+    </article>
+{% endblock %}

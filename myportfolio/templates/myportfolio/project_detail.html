@@ -1,0 +1,68 @@
+{% extends 'myportfolio/base.html' %}
+
+{% block title %}
+    {{ project }}
+{%  endblock %}
+
+{%  block content %}
+    <article>
+    <div class="row">
+    <div class="offset-by-two eight columns">
+    <h2>{{ project }}</h2>
+    <ul class="inline">
+    {% if perms.myportfolio.change_project %}
+        <li>
+            <a href = "{{ project.get_update_url }}" class = "button button-primary">Edit Project
+            </a>
+        </li>
+    {% endif %}
+    {% if perms.myportfolio.delete_project %}
+        <li>
+            <a href = "{{ project.get_delete_url }}" class = "button button-primary">Delete Project
+            </a>
+        </li>
+    {% endif %}
+    </ul>
+    <section>
+        <table>
+            <tr>
+                <th>Title</th>
+                <td>{{ project.project_title }}</td>
+            </tr>
+             <tr>
+                <th>Start Date</th>
+                <td>{{ project.start_date }}</td>
+            </tr>
+            <tr>
+                <th>End date</th>
+                <td>    {% if project.end_date %}
+                            {{ project.end_date }}
+                        {% else %}
+                            In progress
+                        {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>Description:</th>
+                <td>{{ project.description }}</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h3>Contributors</h3>
+        <ul>
+            {% for person in person_list %}
+                <li>
+                    <a href="{{ person.get_absolute_url }}">{{ person }}</a>
+                </li>
+            {% empty %}
+                <li><em>There are no contributors added for this project.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+    </div>
+    </div>
+    </article>
+
+{%  endblock %}
